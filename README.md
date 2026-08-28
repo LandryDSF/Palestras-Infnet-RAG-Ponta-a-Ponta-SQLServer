@@ -43,9 +43,14 @@ Ao longo de sua carreira, acompanhou diversas gerações do SQL Server, atuando 
 
 É Microsoft Certified Trainer (MCT) desde 2002 e professor universitário, além de produzir conteúdo técnico por meio de palestras, lives semanais no youtube, artigos e treinamentos voltados à comunidade de profissionais de dados.
 
-🔗 Onde me encontrar
-**YouTube:** [SQL Server Expert](https://www.youtube.com/@prof-landrySQLServerExpert)
-**LinkedIn:** [SQL Server Expert](https://www.linkedin.com/in/landryduailibe/)
+## 🔗 Onde me encontrar
+**YouTube:** [Canal SQL Server Expert](https://www.youtube.com/@prof-landrySQLServerExpert)
+
+**LinkedIn:** [Landry Duailibe](https://www.linkedin.com/in/landryduailibe/)
+
 **Instagram:** @sqlserver.expert
+
 **TikTok:** @sqlserver.expert
+
 **Blog:** [SQL Server Expert](https://sqlserver-expert.hashnode.dev/)
+
