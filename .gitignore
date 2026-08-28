@@ -1,0 +1,56 @@
+# ================================
+# .gitignore para projetos SQL Server
+# Autor Prof. Landry Duailibe
+# ================================
+
+# --- Arquivos de sistema / IDE (SSMS / VS) ---
+.vs/
+**/.vs/
+
+# Ignorar arquivos temporários do VS Shell
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.slnx
+*.sqlite
+*.tmp
+*.cache
+*.log
+
+# Arquivos internos de estado do VS/SSMS
+*.sqlite
+*.db
+VSWorkspaceState.json
+
+# --- Arquivos temporários genéricos ---
+*.tmp
+*.temp
+*.old
+*.orig
+
+# --- Arquivos de log e dump ---
+*.log
+dump/
+
+# --- Arquivos de banco ---
+*.mdf
+*.ldf
+*.ndf
+
+# --- Arquivos temporários de Office ---
+~$*
+*.tmp.docx
+*.tmp.xlsx
+*.tmp.pptx
+*.tmp.pdf
+
+# --- Arquivos de backup ---
+*.trn
+
+# --- Exceções (sempre manter) ---
+!.sql
+!.md
+!LICENSE
+!README.md
+/.vs/VSWorkspaceState.json
