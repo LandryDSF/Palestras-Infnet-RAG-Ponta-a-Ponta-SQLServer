@@ -3,7 +3,8 @@
 O comando `DBCC CHECKDB` é uma ferramenta poderosa que pode ser usada para verificar e reparar problemas comuns em bancos de dados (BDs) no SQL Server. Aqui estão os passos básicos para usar esse comando:  
 
 ### Passo 1: Definir o banco de dados a ser verificado  
-Antes de executar `DBCC CHECKDB`, é importante definir o banco de dados que deseja verificar. Você pode especificar o nome do banco de dados, como por exemplo: ```sql 
+Antes de executar `DBCC CHECKDB`, é importante definir o banco de dados que deseja verificar. Você pode especificar o nome do banco de dados, como por exemplo:
+```sql 
 EXEC DBCC CHECKDB 'nome_do_banco_de_dados'; 
 ``` 
 
