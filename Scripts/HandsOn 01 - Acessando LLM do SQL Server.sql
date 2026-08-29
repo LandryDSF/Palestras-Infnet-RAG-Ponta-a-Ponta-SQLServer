@@ -36,6 +36,7 @@ RECONFIGURE WITH OVERRIDE
 /*****************************************
  Chamada Chat com LLM Local
  - Execute o Proxy Local Caddy antes
+ c:\caddy\caddy_windows_amd64.exe run --config c:\caddy\Caddyfile
 *****************************************/
 go
 DECLARE @pSystem nvarchar(max) = 'Você é um professor especializado em Microsoft SQL Server.
