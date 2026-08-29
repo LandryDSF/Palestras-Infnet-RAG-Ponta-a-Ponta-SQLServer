@@ -1,5 +1,4 @@
-## Workshop SQL Server Expert - 4ª Edição
-### Construa Soluções com IA Dentro do SQL Server 2025
+## Palestra RAG de Ponta a Ponta no SQL Server 2025
 
 ### ▶️ Instalando e Configurando LLM
 
@@ -14,7 +13,7 @@ Agora precisamos testar se o Ollama está funcionando corretamente. Abra uma jan
 ollama list
 ```
 
-Agora vamos instalar os modelos que serão utilizado no Workshop, alguns para chat e outros para embeddings, você encontra a lista de modelos disponíveis no Ollama no link abaixo:
+Agora vamos instalar alguns modelos para chat e outros para embeddings, você encontra a lista de modelos disponíveis no Ollama no link abaixo:
 https://ollama.com/library
 
 **PowerShell:** Instalando Modelo de Chat **mais pesado**, recebe pergunta e gera resposta em linguagem natural.
@@ -50,7 +49,7 @@ ollama rm llama3.2:1b
 curl -H "Content-Type: application/json" -d "{\"model\":\"llama3.2:1b\",\"messages\":[{\"role\":\"system\",\"content\":\"Você é um assistente que explica conceitos do banco de dados Microsoft SQL Server de forma clara e objetiva.\"},{\"role\":\"user\",\"content\":\"Explique a diferença entre índices clusterizados e índices não clusterizados no SQL Server.\"}],\"stream\":false}" http://localhost:11434/api/chat
 ```
 
-**Command Prompt:** Teste utilizando Modelo de Chat com SSL, requisito para utilizar no SQL Server.
+**Command Prompt:** Teste utilizando Modelo de Chat com SSL, requisito para utilizar no SQL Server. Este teste **vai falhar**, porque o Ollama não responde requisições SSL com criptografia, requisito para interações a partir do SQL Server! Siga os passos do arquivo "Proxy Local.md" para instalar o Proxy Caddy, que fornece acesso criptografado via SSL.
 ```cmd
 curl --ssl-no-revoke -H "Content-Type: application/json" -d "{\"model\":\"llama3.2:1b\",\"messages\":[{\"role\":\"system\",\"content\":\"Você é um assistente que explica conceitos do banco de dados Microsoft SQL Server de forma clara e objetiva.\"},{\"role\":\"user\",\"content\":\"Explique a diferença entre índices clusterizados e índices não clusterizados no SQL Server.\"}],\"stream\":false}" https://localhost/api/chat
 ```
