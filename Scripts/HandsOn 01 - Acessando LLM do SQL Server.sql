@@ -79,7 +79,7 @@ EXEC sp_invoke_external_rest_endpoint
 @response = @response OUTPUT
 
 SELECT JSON_VALUE(@response, '$.result.message.content') AS Resposta
-go
+go 
 
 
 
