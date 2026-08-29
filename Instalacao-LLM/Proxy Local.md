@@ -1,5 +1,4 @@
-## Workshop SQL Server Expert - 4ª Edição
-### Construa Soluções com IA Dentro do SQL Server 2025
+## Palestra RAG de Ponta a Ponta no SQL Server 2025
 
 ### ▶️ Instalando e Configurando Proxy Local Candy
 
@@ -58,13 +57,13 @@ Em outra janela de **Prompt (Command Window)**, para garantir a criação do cer
 .\caddy_windows_amd64.exe trust
 ```
 
-***Janela PowerShell:*** Agora precisamos importar o Certificado gerado para o Trusted Root do Windows, utilize o comando PowerShell abaixo para confirmar a localização do certificado:
+**Janela PowerShell:** Agora precisamos importar o Certificado gerado para o Trusted Root do Windows, utilize o **comando PowerShell** abaixo para confirmar a localização do certificado:
 
 ```text
 Get-ChildItem -Path "$env:APPDATA\Caddy\pki\authorities\local\" -ErrorAction SilentlyContinue
 ```
 
-***Janela PowerShell:*** No comando abaixo importamos o certificado para o Trusted Root do Windows, utilizar janela PowerShell como administrador!
+**Janela PowerShell:** No comando abaixo importamos o certificado para o Trusted Root do Windows, utilizar **janela PowerShell como administrador**!
 
 ```text
 Import-Certificate `
@@ -72,7 +71,7 @@ Import-Certificate `
     -CertStoreLocation Cert:\LocalMachine\Root
 ```
 
-***Janela PowerShell:*** Para verificar a importação do certificado utilizar o comando PowerShell abaixo:
+**Janela PowerShell:** Para verificar a importação do certificado utilizar o **comando PowerShell** abaixo:
 
 ```text
 Get-ChildItem Cert:\LocalMachine\Root | Where-Object { $_.Subject -like "*Caddy*" }
@@ -90,7 +89,9 @@ Agora vamos testar o acesso a LLM via Caddy de dentro do SQL Server.
 Abra o **Management Studio**, em uma janela de Query, cole e execute o comando abaixo:
 
 ```sql
-use Landry_Blogs
+CREATE DATABASE Aula
+go
+USE Aula
 go
 
 -- Habilitar preview features (necessário no SQL Server 2025)
@@ -103,7 +104,8 @@ RECONFIGURE WITH OVERRIDE
 EXECUTE sp_configure 'external rest endpoint enabled', 1
 RECONFIGURE WITH OVERRIDE
 
--- Chamada a LLM Local
+-- Chamada a LLM Local o modelo de chat llama3.2:1b tem que estar instalado no Ollama!
+go
 DECLARE @payload NVARCHAR(MAX) = N'{
     "model": "llama3.2:1b",
     "options": {"temperature":0.3},
