@@ -144,3 +144,29 @@ FROM dbo.BlogChunks_PorTamanho with (nolock)
 
 SELECT * FROM dbo.BlogChunks_PorTamanho with (nolock)
 
+/********************************
+ Métodos de Chuncking
+*********************************/
+SELECT * FROM dbo.BlogPosts
+-- https://sqlserver-expert.hashnode.dev/
+
+SELECT * FROM dbo.BlogChunks_PorTamanho
+WHERE PostId = 1
+ORDER BY PostId, Chunk_Indice
+
+/*
+Você já se deparou com este cenário?  * Arquivo de **log da TempDB** crescendo sem parar.      * Arquivos de dados da TempDB praticamente do mesmo tamanho.       Foi exatamente isso que aconteceu em um ambiente de produção:   uma estação de trabalho travou no meio de uma consulta grande, o SQL Server continuou esperando o cliente, a sessão ficou em SUSPENDED e a **tempdb foi quem pagou a conta**. O arquivo de log foi crescendo… crescendo… por sorte minha rotina que monitora crescimento da TempDB alertou e iniciei o processo de investigação.  Neste post vou mostrar **como diagnostiquei o problema, identifiquei a sessão e dei KILL** com segurança, parando o crescimento do log da TempDB.  ## **1\. Sintomas**  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1765298543542/5d551561-beca-43b6-9f06-8a331ffce2b4.png align="center")  Veja que o arquivo de Log da TempDB estava lotado internament e crescendo, mas os arquivos de dados não estavam crescendo, como a TempDB possui o Recovery m
+
+ue o arquivo de Log da TempDB estava lotado internament e crescendo, mas os arquivos de dados não estavam crescendo, como a TempDB possui o Recovery model SIMPLE, algo estava segurando o “truncar” do Log.  Para constatar este cenário utilizei o comando abaixo, que retornou ACTIVE\_TRANSACTION:  ```sql SELECT  name, log_reuse_wait_desc FROM sys.databases WHERE database_id = 2  -- tempdb ```  A mensagem era clara: **alguma transação ainda estava “segurando” o log da tempdb.**  ## **2\. Identificando a Transação**  Executando o DBCC OPENTRANS na TempDB identifiquei a sessão que estava prendendo o Log da TempDB!  ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1765298961688/5ce742c7-5837-45ce-8da6-8bd55b6b6765.png align="center")  Uma consulta em tabelas grandes e ORDER BY teve que utilizar a TempDB para ordenar, mas a estação de trabalho congelou no meio da execução, resultado o SQL Server estava enviando os dados para estação, ela “sumiu” e o SQL Server ficou aguardando para cont
+*/
+
+-- Chunks variáveis
+SELECT * FROM dbo.BlogChunks
+WHERE PostId = 1
+ORDER BY PostId, Chunk_Indice
+
+/*
+# Diagnóstico de Crescimento Anormal do Log da tempdb no SQL Server  ## Introdução  Você já se deparou com este cenário?  * Arquivo de **log da TempDB** crescendo sem parar.  * Arquivos de dados da TempDB praticamente do mesmo tamanho.   Foi exatamente isso que aconteceu em um ambiente de produção: uma estação de trabalho travou no meio de uma consulta grande, o SQL Server continuou esperando o cliente, a sessão ficou em SUSPENDED e a **tempdb foi quem pagou a conta**. O arquivo de log foi crescendo… crescendo… por sorte minha rotina que monitora crescimento da TempDB alertou e iniciei o processo de investigação.  Neste post vou mostrar **como diagnostiquei o problema, identifiquei a sessão e dei KILL** com segurança, parando o crescimento do log da TempDB.
+
+# Diagnóstico de Crescimento Anormal do Log da tempdb no SQL Server  ## 1. Sintomas  Veja que o arquivo de Log da TempDB estava lotado internament e crescendo, mas os arquivos de dados não estavam crescendo, como a TempDB possui o Recovery model SIMPLE, algo estava segurando o “truncar” do Log.  Para constatar este cenário utilizei o comando abaixo, que retornou ACTIVE_TRANSACTION:  SELECT  name, log_reuse_wait_desc FROM sys.databases WHERE database_id = 2  -- tempdb  A mensagem era clara: **alguma transação ainda estava “segurando” o log da tempdb.**
+*/
